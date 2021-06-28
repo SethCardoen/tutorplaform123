@@ -20,8 +20,8 @@ class student(models.Model):
     phone_number = PhoneNumberField(null=True, blank = True)
     email = models.EmailField(null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    education_level = models.ForeignKey(education_level, on_delete=models.CASCADE, null=True)
-    subject = models.ForeignKey(subject, on_delete=models.CASCADE, null=True)
+    education_level = models.ForeignKey(education_level, on_delete=models.SET_NULL, null=True)
+    subject = models.ManyToManyField(subject)
 
     def __str__(self):
         return self.name
@@ -34,8 +34,8 @@ class tutor(models.Model):
     phone_number = PhoneNumberField(null=True, blank =True)
     email = models.EmailField(null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    education_level = models.ForeignKey(education_level, on_delete=models.CASCADE, null=True)
-    subject = models.ForeignKey(subject, on_delete=models.CASCADE, null=True)
+    education_level = models.ForeignKey(education_level, on_delete=models.SET_NULL, null=True)
+    subject = models.ManyToManyField(subject)
 
     def __str__(self):
         return self.name
@@ -51,7 +51,7 @@ class session(models.Model):
     tutor = models.ForeignKey(tutor, null=True, on_delete=models.SET_NULL)
     student = models.ForeignKey(student, null=True, on_delete=models.SET_NULL)
     notes = models.FileField(null=True, blank=True)
-    current_status = models.ManyToManyField(status)
+    current_status = models.ForeignKey(status, on_delete=models.SET_NULL, null=True)
 
 
 
