@@ -1,11 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import *
 
 def home(request):
-    return render(request, 'stutor/dashboard.html')
+    stu = student.objects.all()
+  #  tut = tutor.objects.all()
 
-def student(request):
-    return render(request, 'stutor/students.html')
+  #  all = {'stu': stu, 'tut': tut}
 
-def tutor(request):
+    return render(request, 'stutor/dashboard.html', {'stu': stu})
+
+def student_page(request):
+    stu = student.objects.all()
+    return render(request, 'stutor/students.html', {'stu': stu})
+
+def tutor_page(request):
+   # tut = tutor.objects.all()
     return render(request, 'stutor/tutor.html')

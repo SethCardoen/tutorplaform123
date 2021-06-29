@@ -15,13 +15,19 @@
       <a class="btn btn-success btn-sm btn block" href="">Schedule a lesson</a>
       <table class="table table-sm">
         <tr>
-          <th></th>
           <th>Subject</th>
           <th>Tutor</th>
           <th>date</th>
           <th>Time</th>
           <th>notes</th>
         </tr>
+
+         {% for i in stu %}
+          <tr>
+            <td>{{i.name}}</td>
+          </tr>
+        {% endfor %}
+
       </table>
 
     </div>
@@ -40,6 +46,7 @@
           <th>Time</th>
           <th>notes</th>
         </tr>
+
       </table>
     </div>
 

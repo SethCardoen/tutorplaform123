@@ -11,17 +11,31 @@
         <div class="card card-body">
             <table class="table">
                 <tr>
-                    <th>tutor</th>
-                    <th>subject</th>
-                    <th>date</th>
-                    <th>time</th>
-                    <th>notes</th>
-                    <th>cost</th>
-                    <th>billing</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Age</th>
+                    <th>Phone number</th>
+                    <th>Email</th>
+                    <th>Education level</th>
+                    <th>Subjects</th>
                 </tr>
+
+                {% for i in stu %}
+                <tr>
+                    <td> {{i.name}} </td>
+                    <td> {{i.surname}} </td>
+                    <td> {{i.age}} </td>
+                    <td> {{i.phone_number}} </td>
+                    <td> {{i.email}} </td>
+                    <td> {{i.education_level}} </td>
+                    <td> {{i.subject}} </td>
+                </tr>
+                {% endfor %}
+
+
             </table>
         </div>
     </div>
 </div>
 
-{% endblock%}
+{% endblock %}
