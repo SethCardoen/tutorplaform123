@@ -4,27 +4,38 @@
 
 {% include 'stutor/status.html' %}
 
+<style>
+  .btn-primary {
+    color: #ffffff;
+    background-color: #e67300;
+    border-color: #ffffff;
+</style>
+
 <br>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-7">
     <h5>Lessons</h5>
     <hr>
     <div class="card card-body">
 
-      <a class="btn btn-success btn-sm btn block" href="">Schedule a lesson</a>
+      <a class="btn btn-primary btn-sm btn block" href="">Schedule a lesson</a>
       <table class="table table-sm">
         <tr>
           <th>Subject</th>
           <th>Tutor</th>
           <th>date</th>
           <th>Time</th>
-          <th>notes</th>
+          <th>description</th>
         </tr>
 
-         {% for i in stu %}
+         {% for i in ses %}
           <tr>
-            <td>{{i.name}}</td>
+            <td>{{i.subject}}</td>
+            <td>{{i.tutor}}</td>
+            <td>{{i.date}}</td>
+            <td>{{i.time}}</td>
+            <td>{{i.description}}</td>
           </tr>
         {% endfor %}
 
@@ -33,19 +44,27 @@
     </div>
   </div>
 
-  <div class="col-md-6">
-    <h5>Last 5 lessons</h5>
+  <div class="col-md-5">
+    <h5>Tutors</h5>
     <hr>
     <div class="card card-body">
-      <a class="btn btn-success  btn-sm btn-block" href="">See previous lessons</a>
+      <a class="btn btn-primary  btn-sm btn-block" href="">Find new tutors</a>
       <table class="table table-sm">
         <tr>
           <th>Subject</th>
           <th>Tutor</th>
-          <th>date</th>
-          <th>Time</th>
-          <th>notes</th>
+          <th>Price an hour</th>
+          <th>Profiles</th>
         </tr>
+
+        {% for i in tut %}
+          <tr>
+            <td>subject</td>
+            <td>{{i.name}}</td>
+            <td>{{i.price_an_hour}}</td>
+            <td> <a class="btn btn-primary  btn-sm btn-block" href="">View Profile</a> </td>
+          </tr>
+        {% endfor %}
 
       </table>
     </div>
