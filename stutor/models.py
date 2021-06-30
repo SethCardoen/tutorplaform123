@@ -35,6 +35,7 @@ class tutor(models.Model):
     age = models.PositiveSmallIntegerField(null=True)
     phone_number = PhoneNumberField(null=True, blank =True)
     email = models.EmailField(null=True)
+    bank_account = models.CharField(max_length=20, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     education_level = models.ForeignKey(education_level, on_delete=models.SET_NULL, null=True)
     subject = models.ManyToManyField(subject)

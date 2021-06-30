@@ -19,9 +19,9 @@
 		<div class="card card-body">
 			<h5>Contact Information</h5>
 			<hr>
-			<p>Email: </p>
-			<p>Phone: </p>
-            <p>Bank account: </p>
+			<p>Email: {{email}}</p>
+			<p>Phone: {{phone}}</p>
+            <p>Bank account: {{bac}}</p>
 
 		</div>
 	</div>
@@ -30,7 +30,7 @@
 		<div class="card card-body">
 			<h5>Total hours of tutoring</h5>
 			<hr>
-			<h1 style="text-align: center;padding: 10px"></h1>
+			<h1 style="text-align: center;padding: 10px">{{ses_count}}</h1>
 		</div>
 	</div>
 </div>
@@ -55,15 +55,28 @@
 		<div class="card card-body">
 			<table class="table table-sm">
 				<tr>
-					<th>student</th>
-                    <th>subject</th>
-                    <th>date</th>
-                    <th>time</th>
-                    <th>notes</th>
-                    <th>cost</th>
-                    <th>billing</th>
-                    <th>Rating</th>
+					<th><h5>Student</h5></th>
+                    <th><h5>Subject</h5></th>
+					<th><h5>Date</h5></th>
+					<th><h5>Time</h5></th>
+					<th><h5>Notes</h5></th>
+					<th><h5>Cost</h5></th>
+					<th><h5>Billing</h5></th>
+					<th><h5>Rating</h5></th>
 				</tr>
+
+				{% for i in session %}
+				<tr>
+					<th>{{i.student}}</th>
+					<th>{{i.subject}}</th>
+					<th>{{i.date}}</th>
+					<th>{{i.time}}</th>
+					<th>{{i.notes}}</th>
+					<th>{{i.price_an_hour}}</th>
+					<th>{{i.current_status}}</th>
+					<th>rating</th>
+				</tr>
+				{% endfor %}
 
 			</table>
 		</div>
