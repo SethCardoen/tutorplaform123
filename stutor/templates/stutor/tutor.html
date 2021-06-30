@@ -2,6 +2,18 @@
 
 {% block content %}
 
+<style>
+  .btn-primary {
+    color: #ffffff;
+    background-color: #e67300;
+    border-color: #ffffff;
+
+    .btn-outline-primary:hover {
+    color: #222;
+    background-color: #ffffff;
+    border-color: #7cc;
+</style>
+
 <br>
 
 <div class="row">
@@ -9,8 +21,9 @@
 		<div class="card card-body">
 			<h5>Customer:</h5>
 			<hr>
-			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update Customer</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete Customer</a>
+			<a class="btn btn-primary  btn-sm btn-block" href="">Update Customer</a>
+			<a></a>
+			<a class="btn btn-primary  btn-sm btn-block" href="">Delete Customer</a>
 
 		</div>
 	</div>
@@ -55,26 +68,26 @@
 		<div class="card card-body">
 			<table class="table table-sm">
 				<tr>
-					<th><h5>Student</h5></th>
-                    <th><h5>Subject</h5></th>
-					<th><h5>Date</h5></th>
-					<th><h5>Time</h5></th>
-					<th><h5>Notes</h5></th>
-					<th><h5>Cost</h5></th>
-					<th><h5>Billing</h5></th>
-					<th><h5>Rating</h5></th>
+					<th>Student</th>
+                    <th>Subject</th>
+					<th>Date</th>
+					<th>Time</th>
+					<th>Notes</th>
+					<th>Cost</th>
+					<th>Billing</th>
+					<th>Rating</th>
 				</tr>
 
 				{% for i in session %}
 				<tr>
-					<th>{{i.student}}</th>
-					<th>{{i.subject}}</th>
-					<th>{{i.date}}</th>
-					<th>{{i.time}}</th>
-					<th>{{i.notes}}</th>
-					<th>{{i.price_an_hour}}</th>
-					<th>{{i.current_status}}</th>
-					<th>rating</th>
+					<td>{{i.student}}</td>
+					<td>{{i.subject}}</td>
+					<td>{{i.date}}</td>
+					<td>{{i.time}}</td>
+					<td>{{i.notes}}</td>
+					<td>{{i.price_an_hour}}</td>
+					<td>{{i.current_status}}</td>
+					<td>rating</td>
 				</tr>
 				{% endfor %}
 
