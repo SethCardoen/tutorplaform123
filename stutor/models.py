@@ -23,7 +23,7 @@ class student(models.Model):
     email = models.EmailField(null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     education_level = models.ForeignKey(education_level, on_delete=models.SET_NULL, null=True)
-    subject = models.ManyToManyField(subject)
+    subject = models.ForeignKey(subject, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name
@@ -38,7 +38,7 @@ class tutor(models.Model):
     bank_account = models.CharField(max_length=20, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     education_level = models.ForeignKey(education_level, on_delete=models.SET_NULL, null=True)
-    subject = models.ManyToManyField(subject)
+    subject = models.ForeignKey(subject, on_delete=models.SET_NULL, null=True)
     price_an_hour = MoneyField(decimal_places=2, default=0, default_currency='EUR', max_digits=11, null=True)
 
 
@@ -57,8 +57,8 @@ class session(models.Model):
     student = models.ForeignKey(student, null=True, on_delete=models.SET_NULL)
     subject = models.ForeignKey(subject, on_delete=models.SET_NULL, null=True)
     tutor = models.ForeignKey(tutor, null=True, on_delete=models.SET_NULL)
-    notes = models.FileField(null=True, blank=True)
-    description = models.TextField(null=True, blank=True, default="No description")
+    notes = models.FileField(null=True, blank=True, default="No notes")
+    description = models.CharField(max_length=300, null=True, blank=True, default="No description")
     price_an_hour = MoneyField(decimal_places=2, default=0, default_currency='EUR', max_digits=11, null=True)
     current_status = models.ForeignKey(status, on_delete=models.SET_NULL, null=True)
 

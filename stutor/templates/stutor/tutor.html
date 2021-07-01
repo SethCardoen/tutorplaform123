@@ -8,10 +8,11 @@
     background-color: #e67300;
     border-color: #ffffff;
 
-    .btn-outline-primary:hover {
-    color: #222;
-    background-color: #ffffff;
-    border-color: #7cc;
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #cc7b1f8a;
+    border-color: #ffffff;
+    }
 </style>
 
 <br>
@@ -21,9 +22,9 @@
 		<div class="card card-body">
 			<h5>Customer:</h5>
 			<hr>
-			<a class="btn btn-primary  btn-sm btn-block" href="">Update Customer</a>
+			<a class="btn btn-primary  btn-sm btn-block" href="">Update account</a>
 			<a></a>
-			<a class="btn btn-primary  btn-sm btn-block" href="">Delete Customer</a>
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_session' tuto_spe.id %}">Schedule new session</a>
 
 		</div>
 	</div>
@@ -54,8 +55,8 @@
 	<div class="col">
 		<div class="card card-body">
 			<form method="get">
-
 		    <button class="btn btn-primary" type="submit">Search</button>
+				{{tutor_page_filter.form}}
 		  </form>
 		</div>
 	</div>

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'stutor',
     'phonenumber_field',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

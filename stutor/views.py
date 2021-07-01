@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import sessionform
+from .filters import session_filter
+#from django.forms import inlineformset_factory
 
 def home(request):
     ses = session.objects.all()
@@ -30,6 +32,9 @@ def tutor_page(request, pk_tutor):
     session = tuto_spe.session_set.all()
     ses_count = session.count()
 
+    tutor_page_filter = session_filter(request.GET, queryset=session) #trow the data in the filter --> filter
+    session = tutor_page_filter.qs # output the filtered data --> redefine it
+
     all = {
         'tuto_spe': tuto_spe,
         'email': email,
@@ -37,12 +42,15 @@ def tutor_page(request, pk_tutor):
         'bac': bac,
         'session': session,
         'ses_count': ses_count,
+        'tutor_page_filter': tutor_page_filter,
     }
 
     return render(request, 'stutor/tutor.html', all)
 
-def create_session(request):
-    form = sessionform()
+def create_session(request, pk_create_session):
+    #session_form_set = inlineformset_factory(tutor, session, fields=(fiel) #give it first the parent, than the child model
+    tuto_spe = tutor.objects.get(id=pk_create_session)
+    form = sessionform(initial={'tutor': tuto_spe, 'subject': tuto_spe.subject, 'price_an_hour': tuto_spe.price_an_hour})
     if request.method == 'POST':
         form = sessionform(request.POST) #if the method is post, than we return the request data from the form
         if form.is_valid():
