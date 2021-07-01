@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from .models import *
+from .forms import sessionform
 
 def home(request):
     ses = session.objects.all()
@@ -42,8 +42,15 @@ def tutor_page(request, pk_tutor):
     return render(request, 'stutor/tutor.html', all)
 
 def create_session(request):
+    form = sessionform()
+    if request.method == 'POST':
+        form = sessionform(request.POST) #if the method is post, than we return the request data from the form
+        if form.is_valid():
+            form.save()
+            return redirect('/')
 
-    context = {}
+        #print('Printing POST:', request.POST)
 
+    context = {'form': form}
     return render(request, 'stutor/session_form.html', context)
 
