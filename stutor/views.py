@@ -54,3 +54,10 @@ def create_session(request):
     context = {'form': form}
     return render(request, 'stutor/session_form.html', context)
 
+def update_session(request, pk_update_session):
+    sessio = session.objects.get(id=pk_update_session)
+    form = sessionform(instance=sessio)
+
+    context = {'form': form}
+    return render(request, 'stutor/session_form.html', context)
+

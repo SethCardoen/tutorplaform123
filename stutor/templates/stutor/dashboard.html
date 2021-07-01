@@ -34,6 +34,8 @@
           <th>date</th>
           <th>Time</th>
           <th>description</th>
+          <th>Update</th>
+          <th>Delete</th>
         </tr>
 
          {% for i in ses %}
@@ -43,6 +45,8 @@
             <td>{{i.date}}</td>
             <td>{{i.time}}</td>
             <td>{{i.description}}</td>
+            <td> <a class="btn btn-primary  btn-sm btn-block" href="{% url 'update_session' i.id %}">Update</a> </td>
+            <td> <a class="btn btn-danger  btn-sm btn-block" href="">Delete</a> </td>
           </tr>
         {% endfor %}
 
@@ -66,7 +70,7 @@
 
         {% for i in tut %}
           <tr>
-            <td>{{i.subject}}</td>
+            <td>subject</td>
             <td>{{i.name}}</td>
             <td>{{i.price_an_hour}}</td>
             <td> <a class="btn btn-primary  btn-sm btn-block" href="{% url 'tutor' i.id %}">View Profile</a> </td>
