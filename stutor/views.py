@@ -40,3 +40,10 @@ def tutor_page(request, pk_tutor):
     }
 
     return render(request, 'stutor/tutor.html', all)
+
+def create_session(request):
+
+    context = {}
+
+    return render(request, 'stutor/session_form.html', context)
+
