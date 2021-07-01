@@ -76,6 +76,8 @@
 					<th>Cost</th>
 					<th>Billing</th>
 					<th>Rating</th>
+					<th>Update</th>
+					<th>Delete</th>
 				</tr>
 
 				{% for i in session %}
@@ -88,7 +90,9 @@
 					<td>{{i.price_an_hour}}</td>
 					<td>{{i.current_status}}</td>
 					<td>rating</td>
-				</tr>
+					<td> <a class="btn btn-primary  btn-sm btn-block" href="{% url 'update_session' i.id %}">Update</a> </td>
+					<td> <a class="btn btn-danger  btn-sm btn-block" href="{% url 'delete_session' i.id %}">Delete</a> </td>
+
 				{% endfor %}
 
 			</table>

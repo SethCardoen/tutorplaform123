@@ -58,6 +58,22 @@ def update_session(request, pk_update_session):
     sessio = session.objects.get(id=pk_update_session)
     form = sessionform(instance=sessio)
 
+    if request.method == 'POST':        #sending new post data from update to the form
+        form = sessionform(request.POST, instance=sessio)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
     context = {'form': form}
     return render(request, 'stutor/session_form.html', context)
+
+def delete_session(request, pk_delete_session):
+    sessio = session.objects.get(id=pk_delete_session)
+
+    if request.method == "POST":
+        sessio.delete()
+        return redirect('/')
+
+    context = {'sessio': sessio}
+    return render(request, 'stutor/delete.html', context)
 

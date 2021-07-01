@@ -46,7 +46,7 @@
             <td>{{i.time}}</td>
             <td>{{i.description}}</td>
             <td> <a class="btn btn-primary  btn-sm btn-block" href="{% url 'update_session' i.id %}">Update</a> </td>
-            <td> <a class="btn btn-danger  btn-sm btn-block" href="">Delete</a> </td>
+            <td> <a class="btn btn-danger  btn-sm btn-block" href="{% url 'delete_session' i.id %}">Delete</a> </td>
           </tr>
         {% endfor %}
 

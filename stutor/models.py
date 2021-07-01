@@ -62,6 +62,8 @@ class session(models.Model):
     price_an_hour = MoneyField(decimal_places=2, default=0, default_currency='EUR', max_digits=11, null=True)
     current_status = models.ForeignKey(status, on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return self.subject.subject
 
 
 
