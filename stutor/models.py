@@ -2,6 +2,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from datetime import datetime
 from djmoney.models.fields import MoneyField
+from django.contrib.auth.models import User
 
 class subject(models.Model):
     subject = models.CharField(max_length=300)
@@ -30,6 +31,7 @@ class student(models.Model):
 
 
 class tutor(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE) #one to one, 1 tutor per user, en 1 user per tutor
     name = models.CharField(max_length=200, null=True)
     surname = models.CharField(max_length=200, null=True)
     age = models.PositiveSmallIntegerField(null=True)

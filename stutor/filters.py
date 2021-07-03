@@ -1,6 +1,6 @@
 import django_filters
 from .models import *
-from django_filters import DateFilter
+from django_filters import DateFilter, CharFilter
 
 class session_filter(django_filters.FilterSet):
     start_date = DateFilter(field_name="date", lookup_expr='gte') # find a date that is greater than or equal to date

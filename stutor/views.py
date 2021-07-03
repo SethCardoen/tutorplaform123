@@ -1,9 +1,59 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import sessionform
+from .forms import sessionform, create_user_form
 from .filters import session_filter
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from .decorators import unauthenticated_user, allowed_users, admin_only
+from django.contrib.auth.models import Group
+from django.contrib.auth.forms import UserCreationForm
 #from django.forms import inlineformset_factory
 
+@unauthenticated_user
+def register_page(request):
+
+    form = create_user_form()
+    if request.method == 'POST':
+        form = create_user_form(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.save()
+            username = form.cleaned_data.get('username')
+
+            group = Group.objects.get(name='student')
+            user.groups.add(group)
+
+            messages.success(request, 'Account was created for ' + username)
+            return redirect('login')
+    context = {'form': form}
+    return render(request, 'stutor/registerpage.html', context)
+
+@unauthenticated_user
+def login_page(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username,  password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.info(request, 'Username OR password is incorrect')
+
+    context = {}
+    return render(request, 'stutor/loginpage.html', context)
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
+
+@login_required(login_url='login')
+@admin_only
 def home(request):
     ses = session.objects.all()
     tut = tutor.objects.all()
@@ -17,9 +67,14 @@ def home(request):
     return render(request, 'stutor/dashboard.html', {'ses': ses, 'tut': tut, 'stu': stu, 'total_tutors': total_tutors, 'total_students': total_students, 'total_sessions': total_sessions})
     return render(request, 'stutor/status.html', {'ses': ses, 'tut': tut, 'stu': stu, 'total_tutors': total_tutors, 'total_students': total_students,'total_sessions': total_sessions})
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'student'])
 def student_page(request):
     stu = student.objects.all()
     return render(request, 'stutor/students.html', {'stu': stu})
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'tutor'])
 
 def tutor_page(request, pk_tutor):
     tuto_spe = tutor.objects.get(id=pk_tutor)
@@ -46,6 +101,18 @@ def tutor_page(request, pk_tutor):
     }
 
     return render(request, 'stutor/tutor.html', all)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'tutor', 'student'])
+
+def user_page(request):
+    tuto_profile = tutor.objects.get(user=request.user)
+    sessionn = tuto_profile.session_set.all()
+    #print('sessionn', sessionn)
+
+    context = {'sessionn': sessionn}
+    return render(request, 'stutor/user.html', context)
 
 def create_session(request, pk_create_session):
     #session_form_set = inlineformset_factory(tutor, session, fields=(fiel) #give it first the parent, than the child model
