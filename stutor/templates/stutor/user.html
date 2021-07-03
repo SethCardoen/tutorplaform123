@@ -5,31 +5,32 @@
 <div class="row">
     <div class="col-md">
         <div class="card card-body">
-            <h5>Test page</h5>
+            <h5>Tutor account page</h5>
         </div>
         <div class="card card-body">
             <table class="table">
                 <tr>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Age</th>
-                    <th>Phone number</th>
-                    <th>Email</th>
-                    <th>Education level</th>
-                    <th>Subjects</th>
-                    <th>Tutor</th>
+                    <th>Student</th>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Notes</th>
+                    <th>Cost</th>
+                    <th>Billing</th>
+                    <th>Rating</th>
                 </tr>
 
                 {% for i in sessionn %}
                 <tr>
                     <td> {{i.student.name}} </td>
-                    <td> {{i.surname}} </td>
-                    <td> {{i.age}} </td>
-                    <td> {{i.phone_number}} </td>
-                    <td> {{i.email}} </td>
-                    <td> {{i.education_level}} </td>
                     <td> {{i.subject}} </td>
-                    <td> test</td>
+                    <td> {{i.date}} </td>
+                    <td> {{i.time}} </td>
+                    <td> {{i.notes}} </td>
+                    <td> {{i.price_an_hour}} </td>
+                    <td> {{i.current_status}} </td>
+                    <td> Rating </td>
+
                 </tr>
                 {% endfor %}
 
