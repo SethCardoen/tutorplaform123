@@ -31,7 +31,7 @@ class student(models.Model):
 
 
 class tutor(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE) #one to one, 1 tutor per user, en 1 user per tutor
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE) #one to one, 1 tutor per user, en 1 user per tutor
     name = models.CharField(max_length=200, null=True)
     surname = models.CharField(max_length=200, null=True)
     age = models.PositiveSmallIntegerField(null=True)
@@ -42,7 +42,7 @@ class tutor(models.Model):
     education_level = models.ForeignKey(education_level, on_delete=models.SET_NULL, null=True)
     subject = models.ForeignKey(subject, on_delete=models.SET_NULL, null=True)
     price_an_hour = MoneyField(decimal_places=2, default=0, default_currency='EUR', max_digits=11, null=True)
-    profile_picture = models.ImageField(null=True, blank=True, default='static/images/defaultprofilepicture.png')
+    profile_picture = models.ImageField(null=True, blank=True, default="defaultprofilepicture.jpg")
 
     def __str__(self):
         return self.name

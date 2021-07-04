@@ -21,7 +21,7 @@ def register_page(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
-            group = Group.objects.get(name='student')
+            group = Group.objects.get(name='tutor')
             user.groups.add(group)
             tutor.objects.create(
                 user=user
