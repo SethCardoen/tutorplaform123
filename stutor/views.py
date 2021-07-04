@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import sessionform, create_user_form
+from .forms import sessionform, create_user_form, tutor_account_form
 from .filters import session_filter
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -23,6 +23,9 @@ def register_page(request):
 
             group = Group.objects.get(name='student')
             user.groups.add(group)
+            tutor.objects.create(
+                user=user
+            )
 
             messages.success(request, 'Account was created for ' + username)
             return redirect('login')
@@ -104,15 +107,33 @@ def tutor_page(request, pk_tutor):
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin', 'tutor', 'student'])
+@allowed_users(allowed_roles=['tutor'])
 
 def user_page(request):
     tuto_profile = tutor.objects.get(user=request.user)
     sessionn = tuto_profile.session_set.all()
-    #print('sessionn', sessionn)
 
-    context = {'sessionn': sessionn}
+    total_sessions = sessionn.count()
+
+    context = {'sessionn': sessionn, 'total_sessions': total_sessions}
     return render(request, 'stutor/user.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'tutor'])
+def account_settings(request):
+    tutor = request.user.tutor
+    form = tutor_account_form(instance=tutor)
+
+    if request.method == 'POST':
+        form = tutor_account_form(request.POST, request.FILES, instance=tutor)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
+    return render(request, 'stutor/account_settings.html', context)
+
+
 
 def create_session(request, pk_create_session):
     #session_form_set = inlineformset_factory(tutor, session, fields=(fiel) #give it first the parent, than the child model

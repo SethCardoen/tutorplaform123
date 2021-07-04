@@ -13,3 +13,10 @@ class create_user_form(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+
+class tutor_account_form(ModelForm):
+    class Meta:
+        model = tutor
+        fields = '__all__'
+        exclude = ['user']

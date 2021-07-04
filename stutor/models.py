@@ -42,7 +42,7 @@ class tutor(models.Model):
     education_level = models.ForeignKey(education_level, on_delete=models.SET_NULL, null=True)
     subject = models.ForeignKey(subject, on_delete=models.SET_NULL, null=True)
     price_an_hour = MoneyField(decimal_places=2, default=0, default_currency='EUR', max_digits=11, null=True)
-
+    profile_picture = models.ImageField(null=True, blank=True, default='static/images/defaultprofilepicture.png')
 
     def __str__(self):
         return self.name

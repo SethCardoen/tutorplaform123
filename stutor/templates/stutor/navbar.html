@@ -21,6 +21,11 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'student' %}">Students</a>
       </li>
+      {% else %}
+      <li class="nav_item">
+        <a class="btn btn-primary  btn-sm btn-block", href="{% url 'account' %}">Account</a>
+      </li>
+    </ul>
       {% endif %}
     </ul>
   </div>
