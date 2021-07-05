@@ -21,12 +21,6 @@ def register_page(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
-            group = Group.objects.get(name='tutor')
-            user.groups.add(group)
-            tutor.objects.create(
-                user=user
-            )
-
             messages.success(request, 'Account was created for ' + username)
             return redirect('login')
     context = {'form': form}
@@ -134,7 +128,8 @@ def account_settings(request):
     return render(request, 'stutor/account_settings.html', context)
 
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def create_session(request, pk_create_session):
     #session_form_set = inlineformset_factory(tutor, session, fields=(fiel) #give it first the parent, than the child model
     tuto_spe = tutor.objects.get(id=pk_create_session)

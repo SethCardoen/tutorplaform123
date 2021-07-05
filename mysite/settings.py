@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stutor',
+    'stutor.apps.StutorConfig',
     'phonenumber_field',
     'django_filters',
 ]
@@ -132,3 +132,12 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images') #stating that if we ad media, we put it in the base directory withing images, static files
+
+#SMTP Configuration (Simple Mail Transfer Protocol)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'peerucation@gmail.com'
+EMAIL_HOST_PASSWORD = 'peerucation2021'
