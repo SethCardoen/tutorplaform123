@@ -21,6 +21,8 @@ def register_page(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
+
+
             messages.success(request, 'Account was created for ' + username)
             return redirect('login')
     context = {'form': form}
@@ -167,4 +169,6 @@ def delete_session(request, pk_delete_session):
 
     context = {'sessio': sessio}
     return render(request, 'stutor/delete.html', context)
+
+
 
