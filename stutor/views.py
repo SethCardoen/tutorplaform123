@@ -21,6 +21,12 @@ def register_page(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
+            user_group = Group.objects.get(name="tutor")
+            user.groups.add(user_group)
+            tutor.objects.create(
+                user=user,
+                name=user.username,
+            )
 
 
             messages.success(request, 'Account was created for ' + username)
