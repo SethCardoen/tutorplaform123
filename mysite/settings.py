@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&c70*7rg%!1%f1m-+*$qiff0lts4y429bc99))^t0@2-r@f#u*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['peerucation.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'stutor.apps.StutorConfig',
     'phonenumber_field',
     'django_filters',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,11 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'peerucation@gmail.com'
 EMAIL_HOST_PASSWORD = 'peerucation2021'
+
+AWS_ACCESS_KEY_ID = 'AKIA5VWMJTXHVBACLLLR'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'peerucation-emmer'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
