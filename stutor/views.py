@@ -176,5 +176,8 @@ def delete_session(request, pk_delete_session):
     context = {'sessio': sessio}
     return render(request, 'stutor/delete.html', context)
 
+def new_dashboard(request):
+    return render(request, 'stutor/index.html')
+
 
 
