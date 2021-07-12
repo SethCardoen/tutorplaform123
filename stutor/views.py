@@ -7,62 +7,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
+from student.models import student_account
+from tutor.models import tutor_account
 from django.contrib.auth.forms import UserCreationForm
 #from django.forms import inlineformset_factory
-
-@unauthenticated_user
-def register_page(request):
-
-    form = create_user_form()
-    if request.method == 'POST':
-        form = create_user_form(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.save()
-            username = form.cleaned_data.get('username')
-
-            user_group = Group.objects.get(name="tutor")
-            user.groups.add(user_group)
-            tutor.objects.create(
-                user=user,
-                name=user.username,
-            )
-
-
-            messages.success(request, 'Account was created for ' + username)
-            return redirect('login')
-    context = {'form': form}
-    return render(request, 'stutor/registerpage.html', context)
-
-@unauthenticated_user
-def login_page(request):
-
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username=username,  password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.info(request, 'Username OR password is incorrect')
-
-    context = {}
-    return render(request, 'stutor/loginpage.html', context)
-
-def logout_user(request):
-    logout(request)
-    return redirect('login')
 
 
 @login_required(login_url='login')
 @admin_only
 def home(request):
     ses = session.objects.all()
-    tut = tutor.objects.all()
-    stu = student.objects.all()
+    tut = tutor_account.objects.all()
+    stu = student_account.objects.all()
 
     total_tutors = tut.count()
     total_students = stu.count()
@@ -75,14 +31,14 @@ def home(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'student'])
 def student_page(request):
-    stu = student.objects.all()
+    stu = student_account.objects.all()
     return render(request, 'stutor/students.html', {'stu': stu})
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'tutor'])
 
 def tutor_page(request, pk_tutor):
-    tuto_spe = tutor.objects.get(id=pk_tutor)
+    tuto_spe = tutor_account.objects.get(id=pk_tutor)
 
     email = tuto_spe.email #atribute opvragen van de classe zelf
     phone = tuto_spe.phone_number
@@ -112,7 +68,7 @@ def tutor_page(request, pk_tutor):
 @allowed_users(allowed_roles=['tutor'])
 
 def user_page(request):
-    tuto_profile = tutor.objects.get(user=request.user)
+    tuto_profile = tutor_account.objects.get(user=request.user)
     sessionn = tuto_profile.session_set.all()
 
     total_sessions = sessionn.count()
@@ -140,7 +96,7 @@ def account_settings(request):
 @allowed_users(allowed_roles=['admin'])
 def create_session(request, pk_create_session):
     #session_form_set = inlineformset_factory(tutor, session, fields=(fiel) #give it first the parent, than the child model
-    tuto_spe = tutor.objects.get(id=pk_create_session)
+    tuto_spe = tutor_account.objects.get(id=pk_create_session)
     form = sessionform(initial={'tutor': tuto_spe, 'subject': tuto_spe.subject, 'price_an_hour': tuto_spe.price_an_hour})
     if request.method == 'POST':
         form = sessionform(request.POST) #if the method is post, than we return the request data from the form

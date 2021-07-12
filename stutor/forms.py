@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from .models import *
+from tutor.models import tutor_account
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
@@ -17,6 +18,6 @@ class create_user_form(UserCreationForm):
 
 class tutor_account_form(ModelForm):
     class Meta:
-        model = tutor
+        model = tutor_account
         fields = '__all__'
         exclude = ['user']

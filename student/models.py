@@ -11,8 +11,8 @@ class student_account(models.Model):
     phone_number = PhoneNumberField(null=True, blank = True)
     email = models.EmailField(null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    education_level = models.ForeignKey(education_level, on_delete=models.SET_NULL, null=True)
-    subject = models.ForeignKey(subject, on_delete=models.SET_NULL, null=True)
+    student_education_level = models.ForeignKey(to='stutor.education_level', on_delete=models.SET_NULL, null=True)
+    student_subject = models.ForeignKey(subject, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name
