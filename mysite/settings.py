@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'stutor.apps.StutorConfig',
     'welcome.apps.WelcomeConfig',
+    'tutor.apps.TutorConfig',
     'phonenumber_field',
     'django_filters',
     'storages',
