@@ -50,3 +50,7 @@ def student_login_page(request):
 @login_required(login_url='student_login')
 def student_dashboard(request):
     return render(request, 'student/dashboard.html')
+
+def logout_user(request):
+    logout(request)
+    return redirect('student_login')
