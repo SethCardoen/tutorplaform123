@@ -7,15 +7,15 @@ body{
 background-color: #ffffff
 }
 
-#number-of-sessions-in-last-month{
+#total-number-of-students{
     background-color: #e67300
 }
 
-#number-of-sessions-in-last-year{
+#total-number-of-sessions-this-month{
     background-color: #e67300
 }
 
-#time-saved-studying{
-    background-color: #e67300
+#money-earned-this-month{
+    title-background-color: #e67300
 }
 
