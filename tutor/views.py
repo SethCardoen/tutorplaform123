@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import *
+from .models import tutor_account
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from stutor.decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
-from .forms import create_tutor_form
+from .forms import create_tutor_form, tutor_account_form
+from django.contrib.auth.models import User
+
 
 @unauthenticated_user
 def tutor_register_page(request):
@@ -56,5 +58,17 @@ def logout_user(request):
 def home(request):
     return render(request, 'tutor/home.html')
 
+#@login_required(login_url='login')
+#@allowed_users(allowed_roles=['admin', 'tutor'])
 def settings(request):
-    return render(request, 'tutor/settings.html')
+    tutor = request.user.tutor_account
+    print(tutor)
+    form = tutor_account_form(instance=tutor)
+
+    if request.method == 'POST':
+        form = tutor_account_form(request.POST, request.FILES, instance=tutor_account)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
+    return render(request, 'tutor/settings.html', context)

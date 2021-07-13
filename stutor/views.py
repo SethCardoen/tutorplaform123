@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import sessionform, create_user_form, tutor_account_form
+from .forms import sessionform, create_user_form
 from .filters import session_filter
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -9,6 +9,7 @@ from .decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
 from student.models import student_account
 from tutor.models import tutor_account
+from tutor.forms import tutor_account_form
 from django.contrib.auth.forms import UserCreationForm
 #from django.forms import inlineformset_factory
 
@@ -76,22 +77,6 @@ def user_page(request):
     context = {'sessionn': sessionn, 'total_sessions': total_sessions}
     return render(request, 'stutor/user.html', context)
 
-
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['admin', 'tutor'])
-def account_settings(request):
-    tutor = request.user.tutor
-    form = tutor_account_form(instance=tutor)
-
-    if request.method == 'POST':
-        form = tutor_account_form(request.POST, request.FILES, instance=tutor)
-        if form.is_valid():
-            form.save()
-
-    context = {'form': form}
-    return render(request, 'stutor/account_settings.html', context)
-
-
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
 def create_session(request, pk_create_session):
@@ -134,6 +119,7 @@ def delete_session(request, pk_delete_session):
 
 def new_dashboard(request):
     return render(request, 'stutor/index.html')
+
 
 
 
