@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>dashboard</title>
-</head>
-<body>
+{% extends 'stutor/main.html' %}
+
+{% block content %}
+
 <h1>student home page</h1>
 <br>
 in navbar:
@@ -17,6 +14,7 @@ settings page
 <br>
 notes videos...
 <br>
-<a class="btn btn-primary  btn-sm btn-block" href="{% url 'logout' %}">Logout</a>
-</body>
-</html>
+
+
+
+{% endblock %}

@@ -25,32 +25,14 @@ def student_register_page(request):
             )
 
             messages.success(request, 'Student account was created for ' + username)
-            return redirect('student_login')
+            return redirect('tutor:tutor_login')
     context = {'form': form}
     return render(request, 'student/registerpage.html', context)
 
-@unauthenticated_user
-def student_login_page(request):
-
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username=username,  password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('student_home')
-        else:
-            messages.info(request, 'Username OR password is incorrect')
-
-    context = {}
-    return render(request, 'student/loginpage.html', context)
-
-@login_required(login_url='student_login')
+@login_required(login_url='tutor:tutor_login')
 def student_dashboard(request):
     return render(request, 'student/dashboard.html')
 
-def logout_user(request):
+def logout(request):
     logout(request)
-    return redirect('student_login')
+    return redirect('tutor:tutor_login')

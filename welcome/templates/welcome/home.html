@@ -9,15 +9,14 @@
 
 <p>info, prices, photo,...</p>
 
-<p>login as a</p>
-<a class="btn btn-primary  btn-sm btn-block" href="{% url 'student_login' %}">Student</a>
-<a class="btn btn-primary  btn-sm btn-block" href="{% url 'tutor_login' %}">Tutor</a>
+<a class="btn btn-primary  btn-sm btn-block" href="{% url 'tutor:tutor_login' %}">Login</a>
+
 
 <br>
 
 <p>register as a</p>
-<a class="btn btn-primary  btn-sm btn-block" href="{% url 'student_register' %}">Student</a>
-<a class="btn btn-primary  btn-sm btn-block" href="{% url 'tutor_register' %}">Tutor</a>
+<a class="btn btn-primary  btn-sm btn-block" href="{% url 'student:student_register' %}">Student</a>
+<a class="btn btn-primary  btn-sm btn-block" href="{% url 'tutor:tutor_register' %}">Tutor</a>
 
 <br>
 <p>about us</p>

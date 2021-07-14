@@ -9,3 +9,5 @@ urlpatterns = [
     path('logout/', views.logout_user, name="logout"),
 
 ]
+
+app_name = "tutor"

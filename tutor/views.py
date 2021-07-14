@@ -57,7 +57,7 @@ def student_login_page(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('tutor_login')
+    return redirect('tutor:tutor_login')
 
 
 def home(request):
