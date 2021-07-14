@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Tutor Home page</title>
-</head>
-<body>
+{% extends 'stutor/main.html' %}
+
+{% block content %}
 <h1>Tutor home</h1>
 <a class="btn btn-primary  btn-sm btn-block" href="{% url 'logout' %}">Logout</a>
-</body>
-</html>
+{% endblock %}

@@ -8,3 +8,5 @@ urlpatterns = [
     path('home/', views.student_dashboard, name='student_home'),
     path('logout/', views.logout_user, name='logout'),
 ]
+
+app_name = "student"
