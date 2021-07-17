@@ -28,7 +28,7 @@ def tutor_register_page(request):
             )
 
             messages.success(request, 'Account was created for ' + username)
-            return redirect('tutor_login')
+            return redirect('tutor:tutor_login')
     context = {'form': form}
     return render(request, 'tutor/registerpage.html', context)
 
@@ -45,7 +45,7 @@ def student_login_page(request):
             login(request, user)
             users_in_group = Group.objects.get(name="tutor").user_set.all()
             if user in users_in_group:
-                return redirect('home')
+                return redirect('tutor:home')
             else:
                 return redirect('student:student_home')
         else:
