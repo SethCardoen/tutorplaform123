@@ -44,10 +44,12 @@
                                 <form method="POST" action="">
                                     {% csrf_token %}
                                     <div class="form-group">
-                                        <input type="text" name="username" placeholder="Username" class="form-control form-control-user">
+                                        <input type="text" name="username" placeholder="Username"
+                                               class="form-control form-control-user">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" placeholder="Password" class="form-control form-control-user">
+                                        <input type="password" name="password" placeholder="Password"
+                                               class="form-control form-control-user">
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
@@ -63,7 +65,7 @@
                                         <input class="btn btn-primary btn-user btn-block" type="submit" value="Login">
                                     </div>
                                     <hr>
-                                    <a href="home.html" class="btn btn-google btn-user btn-block">
+                                    <a href="/" class="btn btn-google btn-user btn-block">
                                         <i class="fab fa-google fa-fw"></i> Login with Google
                                     </a>
                                     <a href="home.html" class="btn btn-facebook btn-user btn-block">
@@ -75,7 +77,12 @@
                                     <a class="small" href="{% url 'reset_password' %}">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="{% url 'student:student_register' %}">Create an Account!</a>
+                                    <a class="small" href="{% url 'student:student_register' %}">Create a student
+                                        Account!</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="{% url 'tutor:tutor_register' %}">Create a tutor
+                                        Account!</a>
                                 </div>
                             </div>
                         </div>

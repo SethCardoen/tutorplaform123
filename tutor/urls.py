@@ -8,6 +8,7 @@ urlpatterns = [
     path('login/', views.student_login_page, name="tutor_login"),
     path('logout/', views.logout_user, name="logout"),
 
+
 ]
 
 app_name = "tutor"

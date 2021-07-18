@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import *
+from .models import tutor_account
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -67,14 +67,15 @@ def home(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'tutor'])
 def settings(request):
-    tutor = User.objects.get(username=request.user.username)
+    tutor = request.user.tutor_account
     print(tutor)
     form = tutor_account_form(instance=tutor)
 
     if request.method == 'POST':
-        form = tutor_account_form(request.POST, request.FILES, instance=tutor_account)
+        form = tutor_account_form(request.POST, request.FILES, instance=tutor)
         if form.is_valid():
             form.save()
+            return redirect('tutor:home')
 
-    context = {'form': form}
+    context = {'form': form, 'tutor':tutor}
     return render(request, 'tutor/settings.html', context)

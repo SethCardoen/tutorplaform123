@@ -8,7 +8,7 @@ urlpatterns = [
     path('overview/', include('stutor.urls')),
     path('student/', include('student.urls')),
     path('', include('welcome.urls')),
-    path('tutor/', include('tutor.urls'))
-]
+    path('tutor/', include('tutor.urls')),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

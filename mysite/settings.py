@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_filters',
     'storages',
     'student.apps.StudentConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -130,15 +131,17 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+MEDIA_URL = '/images/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images') #stating that if we ad media, we put it in the base directory withing images, static files
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images') #stating that if we ad media, we put it in the base directory withing images, static files
 
 #SMTP Configuration (Simple Mail Transfer Protocol)
 
@@ -149,12 +152,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'peerucation@gmail.com'
 EMAIL_HOST_PASSWORD = 'peerucation2021'
 
-'''
-AWS_ACCESS_KEY_ID = 'AKIA5VWMJTXHVBACLLLR'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'peerucation-emmer'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-'''
+
+
+

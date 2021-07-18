@@ -477,7 +477,7 @@ mark,
 }
 
 .img-fluid {
-  max-width: 100%;
+  max-width: 20%;
   height: auto;
 }
 
@@ -6608,6 +6608,8 @@ button.bg-dark:focus {
 
 .rounded-circle {
   border-radius: 50% !important;
+  padding: 100px 100px 100px 100px;
+
 }
 
 .rounded-pill {
@@ -10861,19 +10863,19 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://unsplash.it/600/800");
+  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
   background-position: center;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("https://source.unsplash.com/gcw_WWu_uBQ/600x800");
+  background: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
   background-position: center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url("https://source.unsplash.com/gcw_WWu_uBQ/600x800");
+  background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
   background-position: center;
   background-size: cover;
 }
