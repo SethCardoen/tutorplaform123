@@ -65,7 +65,7 @@ def tutor_page(request, pk_tutor):
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['tutor'])
+@allowed_users(allowed_roles=['admin'])
 
 def user_page(request):
     tuto_profile = tutor_account.objects.get(user=request.user)
@@ -118,6 +118,9 @@ def delete_session(request, pk_delete_session):
 
 def new_dashboard(request):
     return render(request, 'stutor/index.html')
+
+def test(request):
+    return render(request, 'static/css/test.html')
 
 
 
