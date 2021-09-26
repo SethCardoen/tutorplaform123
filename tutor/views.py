@@ -61,7 +61,9 @@ def logout_user(request):
 
 
 def home(request):
-    return render(request, 'tutor/home.html')
+    tutor = request.user.tutor_account
+    context = {'tutor': tutor}
+    return render(request, 'tutor/home.html', context)
 
 
 @login_required(login_url='login')
@@ -79,3 +81,52 @@ def settings(request):
 
     context = {'form': form, 'tutor':tutor}
     return render(request, 'tutor/settings.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['tutor'])
+def mystudents(request):
+    tutor = request.user.tutor_account
+    context = {'tutor': tutor}
+    return render(request, 'tutor/mystudents.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['tutor'])
+def findnewstudents(request):
+    tutor = request.user.tutor_account
+    context = {'tutor': tutor}
+    return render(request, 'tutor/findnewstudents.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['tutor'])
+def plannewlessons(request):
+    tutor = request.user.tutor_account
+    context = {'tutor': tutor}
+    return render(request, 'tutor/plannewlessons.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['tutor'])
+def viewpreviouslessons(request):
+    tutor = request.user.tutor_account
+    context = {'tutor': tutor}
+    return render(request, 'tutor/viewpreviouslessons.html', context)
+# 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['tutor'])
+def stats(request):
+    tutor = request.user.tutor_account
+    context = {'tutor': tutor}
+    return render(request, 'tutor/stats.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['tutor'])
+def notes(request):
+    tutor = request.user.tutor_account
+    context = {'tutor': tutor}
+    return render(request, 'tutor/notes.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['tutor'])
+def videos(request):
+    tutor = request.user.tutor_account
+    context = {'tutor': tutor}
+    return render(request, 'tutor/videos.html', context)
