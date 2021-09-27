@@ -109,14 +109,14 @@ def viewpreviouslessons(request):
     tutor = request.user.tutor_account
     context = {'tutor': tutor}
     return render(request, 'tutor/viewpreviouslessons.html', context)
-# 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['tutor'])
 def stats(request):
     tutor = request.user.tutor_account
     context = {'tutor': tutor}
     return render(request, 'tutor/stats.html', context)
-#
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['tutor'])
 def notes(request):
