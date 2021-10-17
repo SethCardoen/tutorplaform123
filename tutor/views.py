@@ -8,6 +8,7 @@ from django.contrib.auth.models import Group
 from .forms import create_tutor_form, tutor_account_form
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
+from stutor.models import *
 
 
 @unauthenticated_user
@@ -107,7 +108,9 @@ def plannewlessons(request):
 @allowed_users(allowed_roles=['tutor'])
 def viewpreviouslessons(request):
     tutor = request.user.tutor_account
-    context = {'tutor': tutor}
+    allsessions = session.objects.all()
+    mysessions = allsessions.filter(tutor = tutor)
+    context = {'tutor': tutor, 'mysessions': mysessions}
     return render(request, 'tutor/viewpreviouslessons.html', context)
 
 @login_required(login_url='login')

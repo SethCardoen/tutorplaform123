@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+
+from stutor.models import *
 from .models import *
 from .models import student_account
 from .forms import create_student_form, student_account_form
@@ -7,6 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from stutor.decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
+from .filters import tutor_sidebar_filter
 
 @unauthenticated_user
 def student_register_page(request):
@@ -23,6 +26,7 @@ def student_register_page(request):
             student_account.objects.create(
                 user=user,
                 name=user.username,
+                email=user.email,
             )
 
             messages.success(request, 'Student account was created for ' + username)
@@ -32,8 +36,12 @@ def student_register_page(request):
 
 @login_required(login_url='tutor:tutor_login')
 def student_dashboard(request):
+    teach = tutor_account.objects.all()
+   # teach = tutor_account.objects.get(id=pk_student)
     student = request.user.student_account
-    context ={'student': student}
+   # tutor_sidebar_filter_them = tutor_sidebar_filter(request.GET, queryset=teach)
+   # teachere = tutor_sidebar_filter_them.qs
+    context ={'student': student, 'teachere': teach}
     return render(request, 'student/dashboard.html', context)
 
 def logout(request):
@@ -80,7 +88,9 @@ def plannewlessons(request):
 @allowed_users(allowed_roles=['student'])
 def viewpreviouslessons(request):
     student = request.user.student_account
-    context = {'student': student}
+    allsesions = session.objects.all()
+    mysessions = allsesions.filter(student = student)
+    context = {'student': student, 'mysessions': mysessions}
     return render(request, 'student/viewpreviouslessons.html', context)
 
 @login_required(login_url='login')

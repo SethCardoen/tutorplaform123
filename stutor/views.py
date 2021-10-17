@@ -37,7 +37,6 @@ def student_page(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'tutor'])
-
 def tutor_page(request, pk_tutor):
     tuto_spe = tutor_account.objects.get(id=pk_tutor)
 
@@ -67,7 +66,6 @@ def tutor_page(request, pk_tutor):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-
 def user_page(request):
     tuto_profile = tutor_account.objects.get(user=request.user)
     sessionn = tuto_profile.session_set.all()
@@ -94,6 +92,8 @@ def create_session(request, pk_create_session):
     context = {'form': form}
     return render(request, 'stutor/session_form.html', context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def update_session(request, pk_update_session):
     sessio = session.objects.get(id=pk_update_session)
     form = sessionform(instance=sessio)
@@ -107,6 +107,8 @@ def update_session(request, pk_update_session):
     context = {'form': form}
     return render(request, 'stutor/session_form.html', context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def delete_session(request, pk_delete_session):
     sessio = session.objects.get(id=pk_delete_session)
 
@@ -117,9 +119,13 @@ def delete_session(request, pk_delete_session):
     context = {'sessio': sessio}
     return render(request, 'stutor/delete.html', context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def new_dashboard(request):
     return render(request, 'stutor/index.html')
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def test(request):
     return render(request, 'static/css/test.html')
 

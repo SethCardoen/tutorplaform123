@@ -65,10 +65,12 @@
             </a>
             <div aria-labelledby="headingTwo" class="collapse" data-parent="#accordionSidebar" id="collapseTwo">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">All students</h6>
+                    <h6 class="collapse-header">All tutors</h6>
                 <!-- list of all tutors here -->
-                    <a class="collapse-item" href="{% url 'student:mytutors' %}">Tutor 1</a>
-                    <a class="collapse-item" href="{% url 'student:mytutors' %}">Tutor 2</a>
+                    {% for i in teachere %}
+                    <a class="collapse-item" href="{% url 'student:mytutors' %}">{{i.name}}</a>
+                    {% endfor %}
+
                 </div>
             </div>
         </li>

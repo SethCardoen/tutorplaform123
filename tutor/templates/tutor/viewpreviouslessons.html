@@ -2,6 +2,27 @@
 
 {% block content %}
 
-View previous lessons page
+<h1>Previous lessons</h1>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Student</th>
+      <th scope="col">Subject</th>
+      <th scope="col">notes</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in mysessions %}
+    <tr>
+      <th scope="row">{{i.date}}</th>
+      <td>{{i.student}}</td>
+        <td>{{i.subject}}</td>
+        <td>{{i.notes}}</td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
