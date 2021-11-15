@@ -15,6 +15,7 @@ urlpatterns = [
     path('notes/', views.notes, name='notes'),
     path('videos/', views.videos, name='videos'),
 
+
 ]
 
 app_name = "tutor"

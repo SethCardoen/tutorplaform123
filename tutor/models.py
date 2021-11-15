@@ -18,5 +18,7 @@ class tutor_account(models.Model):
     #tutor_subject = models.ForeignKey(subject, on_delete=models.SET_NULL, null=True)
     price_an_hour = MoneyField(decimal_places=2, default=0, default_currency='EUR', max_digits=11, null=True)
     profile_picture = models.ImageField(null=True, blank=True, default="defaultprofilepicture.jpeg")
+
     def __str__(self):
         return self.name
+

@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 
+import stutor.models
+import tutor
 from stutor.models import *
-from .models import *
+from tutor.models import tutor_account
+
 from .models import student_account
 from .forms import create_student_form, student_account_form
 from django.contrib import messages
@@ -9,7 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from stutor.decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
-from .filters import tutor_sidebar_filter
+
 
 @unauthenticated_user
 def student_register_page(request):
@@ -36,9 +39,14 @@ def student_register_page(request):
 
 @login_required(login_url='tutor:tutor_login')
 def student_dashboard(request):
-    teach = tutor_account.objects.all()
-   # teach = tutor_account.objects.get(id=pk_student)
+    #teach = tutor_account.objects.all()
     student = request.user.student_account
+    teach = request.user.student_account.linked_tutors.all()
+
+
+
+   # teach = tutor_account.objects.get(id=pk_student)
+
    # tutor_sidebar_filter_them = tutor_sidebar_filter(request.GET, queryset=teach)
    # teachere = tutor_sidebar_filter_them.qs
     context ={'student': student, 'teachere': teach}

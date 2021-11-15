@@ -1,0 +1,17 @@
+windows
+-------
+del   ".\student\migrations\*"
+del   ".\stutor\migrations\*"
+del   ".\tutor\migrations\*"
+
+
+python manage.py makemigrations stutor
+python manage.py makemigrations tutor
+python manage.py makemigrations student
+
+Make in one go!!!!!
+python manage.py makemigrations stutor tutor student
+
+
+python manage.py createsuperuser
+

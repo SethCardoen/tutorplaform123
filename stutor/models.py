@@ -1,8 +1,7 @@
 from django.db import models
 from datetime import datetime
 from djmoney.models.fields import MoneyField
-from student.models import student_account
-from tutor.models import tutor_account
+
 
 
 class subject(models.Model):
@@ -37,11 +36,8 @@ class session(models.Model):
     def __str__(self):
         return self.subject.subject
 
-class studentTutorLink(models.Model):
-    studentInLink = models.Foreignkey(student_account, on_delete=models.SET_NULL)
-    tutorInLink = models.ForeignKey(tutor_account, on_delete=models.SET_NULL)
-    class Meta:
-        unique_together = ('studentInLink', 'tutorInLink')
+
+
 '''
 # blog/models.py
 class BlogContributor(models.Model):

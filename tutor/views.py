@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+
+from student.models import student_account
 from .models import tutor_account
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -80,15 +82,18 @@ def settings(request):
             form.save()
             return redirect('tutor:home')
 
-    context = {'form': form, 'tutor':tutor}
+    context = {'form': form, 'tutor': tutor}
     return render(request, 'tutor/settings.html', context)
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['tutor'])
 def mystudents(request):
-    tutor = request.user.tutor_account
-    context = {'tutor': tutor}
+    #tutor = request.user.tutor_account
+    mystudents = request.user.tutor_account.student_account_set.all()
+    context = {'mystudents': mystudents}
     return render(request, 'tutor/mystudents.html', context)
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['tutor'])
@@ -97,6 +102,7 @@ def findnewstudents(request):
     context = {'tutor': tutor}
     return render(request, 'tutor/findnewstudents.html', context)
 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['tutor'])
 def plannewlessons(request):
@@ -104,14 +110,16 @@ def plannewlessons(request):
     context = {'tutor': tutor}
     return render(request, 'tutor/plannewlessons.html', context)
 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['tutor'])
 def viewpreviouslessons(request):
     tutor = request.user.tutor_account
     allsessions = session.objects.all()
-    mysessions = allsessions.filter(tutor = tutor)
+    mysessions = allsessions.filter(tutor=tutor)
     context = {'tutor': tutor, 'mysessions': mysessions}
     return render(request, 'tutor/viewpreviouslessons.html', context)
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['tutor'])
@@ -120,6 +128,7 @@ def stats(request):
     context = {'tutor': tutor}
     return render(request, 'tutor/stats.html', context)
 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['tutor'])
 def notes(request):
@@ -127,9 +136,14 @@ def notes(request):
     context = {'tutor': tutor}
     return render(request, 'tutor/notes.html', context)
 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['tutor'])
 def videos(request):
-    tutor = request.user.tutor_account
-    context = {'tutor': tutor}
+
+    list = request.user.tutor_account.student_account_set.all()
+    context = {'list': list}
     return render(request, 'tutor/videos.html', context)
+
+
+

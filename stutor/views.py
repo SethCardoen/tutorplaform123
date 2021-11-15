@@ -21,6 +21,7 @@ def home(request):
     tut = tutor_account.objects.all()
     stu = student_account.objects.all()
 
+
     total_tutors = tut.count()
     total_students = stu.count()
     total_sessions = ses.count()
