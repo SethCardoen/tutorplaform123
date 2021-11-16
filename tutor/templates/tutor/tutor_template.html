@@ -71,7 +71,7 @@
                     <!--<a class="collapse-item" href="{% url 'tutor:mystudents' %}">student 2</a> -->
 
                     {% for i in mystudents %}
-                    <a class="collapse-item" href="{% url 'student:my_students' %}">{{i.name}}</a>
+                    <a class="collapse-item">{{i.name}}</a>
                     {% endfor %}
 
 

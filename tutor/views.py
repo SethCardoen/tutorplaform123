@@ -65,7 +65,8 @@ def logout_user(request):
 
 def home(request):
     tutor = request.user.tutor_account
-    context = {'tutor': tutor}
+    mystudents = request.user.tutor_account.student_account_set.all()
+    context = {'tutor': tutor, 'mystudents': mystudents}
     return render(request, 'tutor/home.html', context)
 
 
