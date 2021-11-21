@@ -94,6 +94,13 @@ def plannewlessons(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['student'])
+def tasks(request):
+    student = request.user.student_account
+    context = {'student': student}
+    return render(request, 'student/tasks.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['student'])
 def viewpreviouslessons(request):
     student = request.user.student_account
     allsesions = session.objects.all()

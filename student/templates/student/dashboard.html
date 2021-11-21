@@ -1,20 +1,34 @@
 {% extends 'student/student_template.html' %}
-
+{% load static %}
 {% block content %}
 
-<h1>student home page</h1>
-<br>
-in navbar:
-<br>
-sessions + planning new ones
-<br>
-tutors + finding new ones
-<br>
-settings page
-<br>
-notes videos...
-<br>
 
+ <div class="row">
+
+                        <div class="col-lg-8">
+
+                            <!-- Default Card Example -->
+                            <div class="card mb-8">
+                                <div class="card-body">
+                                    <table>
+                                        <td style="width:80%"><h6>Welcom back, <b>{{request.user}} {{student.surname}}!</b></h6>
+                                            You completed 30% of your tasks and planned 2 sessions.
+                                        </td>
+                                        <td style="width:20%" class="center"><img src="{% static 'images/dashboardim.png'%}" width="200" height="200" class="center"></td>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <img src="{% static 'images/calendar.png'%}" width="200" height="200" class="center">
+                                </div>
+                            </div>
+                        </div>
+ </div>
 
 
 {% endblock %}
