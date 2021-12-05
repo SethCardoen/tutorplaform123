@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from student.models import student_account
@@ -13,8 +14,9 @@ from django.contrib.auth.models import Group
 from stutor.models import *
 
 
-@unauthenticated_user
+
 def tutor_register_page(request):
+    print("tester")
     form = create_tutor_form()
     if request.method == 'POST':
         form = create_tutor_form(request.POST)
@@ -34,28 +36,6 @@ def tutor_register_page(request):
             return redirect('tutor:tutor_login')
     context = {'form': form}
     return render(request, 'tutor/registerpage.html', context)
-
-
-@unauthenticated_user
-def student_login_page(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            users_in_group = Group.objects.get(name="tutor").user_set.all()
-            if user in users_in_group:
-                return redirect('tutor:home')
-            else:
-                return redirect('student:student_home')
-        else:
-            messages.info(request, 'Username OR password is incorrect')
-
-    context = {}
-    return render(request, 'tutor/loginpage.html', context)
 
 
 def logout_user(request):

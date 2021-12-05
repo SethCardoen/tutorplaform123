@@ -13,6 +13,27 @@ from tutor.forms import tutor_account_form
 from django.contrib.auth.forms import UserCreationForm
 #from django.forms import inlineformset_factory
 
+@unauthenticated_user
+def stutor_login_page(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            users_in_group = Group.objects.get(name="tutor").user_set.all()
+            if user in users_in_group:
+                return redirect('tutor:home')
+            else:
+                return redirect('student:student_home')
+        else:
+            messages.info(request, 'Username OR password is incorrect')
+
+    context = {}
+    return render(request, 'stutor/loginpage.html', context)
 
 @login_required(login_url='login')
 @admin_only

@@ -14,8 +14,9 @@ from stutor.decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
 
 
-@unauthenticated_user
+
 def student_register_page(request):
+
     form = create_student_form()
     if request.method == 'POST':
         form = create_student_form(request.POST)
