@@ -13,6 +13,10 @@ from tutor.forms import tutor_account_form
 from django.contrib.auth.forms import UserCreationForm
 #from django.forms import inlineformset_factory
 
+def logout_user(request):
+    logout(request)
+    return redirect('stutor:stutor_login')
+
 @unauthenticated_user
 def stutor_login_page(request):
 
@@ -26,7 +30,7 @@ def stutor_login_page(request):
             login(request, user)
             users_in_group = Group.objects.get(name="tutor").user_set.all()
             if user in users_in_group:
-                return redirect('tutor:home')
+                return redirect('tutor:stutor_home')
             else:
                 return redirect('student:student_home')
         else:
@@ -48,7 +52,7 @@ def home(request):
     total_sessions = ses.count()
    # total_math = session.filter(subject='mathematics').count()
 
-    return render(request, 'stutor/dashboard.html', {'ses': ses, 'tut': tut, 'stu': stu, 'total_tutors': total_tutors, 'total_students': total_students, 'total_sessions': total_sessions})
+    return render(request, 'stutor/student_home.html', {'ses': ses, 'tut': tut, 'stu': stu, 'total_tutors': total_tutors, 'total_students': total_students, 'total_sessions': total_sessions})
     return render(request, 'stutor/status.html', {'ses': ses, 'tut': tut, 'stu': stu, 'total_tutors': total_tutors, 'total_students': total_students,'total_sessions': total_sessions})
 
 @login_required(login_url='login')

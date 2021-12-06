@@ -34,28 +34,26 @@ def student_register_page(request):
             )
 
             messages.success(request, 'Student account was created for ' + username)
-            return redirect('tutor:tutor_login')
+            return redirect('stutor:stutor_login')
     context = {'form': form}
     return render(request, 'student/registerpage.html', context)
 
-@login_required(login_url='tutor:tutor_login')
-def student_dashboard(request):
-    #teach = tutor_account.objects.all()
+@login_required(login_url='stutor:stutor_login')
+def student_home(request):
+
     student = request.user.student_account
     teach = request.user.student_account.linked_tutors.all()
-
-
-
-   # teach = tutor_account.objects.get(id=pk_student)
-
-   # tutor_sidebar_filter_them = tutor_sidebar_filter(request.GET, queryset=teach)
-   # teachere = tutor_sidebar_filter_them.qs
-    context ={'student': student, 'teachere': teach}
-    return render(request, 'student/dashboard.html', context)
+    context ={'student': student, 'teacher': teach}
+    return render(request, 'student/student_home.html', context)
 
 def logout(request):
+    print("logout....")
     logout(request)
-    return redirect('tutor:tutor_login')
+
+    return redirect('stutor:stutor_login')
+
+
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'student'])

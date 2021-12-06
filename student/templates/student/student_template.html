@@ -67,13 +67,14 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">All tutors</h6>
                 <!-- list of all tutors here -->
-                    {% for i in teachere %}
+                    {% for i in teacher %}
                     <a class="collapse-item" href="{% url 'student:mytutors' %}">{{i.name}}</a>
                     {% endfor %}
 
                 </div>
             </div>
         </li>
+        teacher
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
@@ -355,7 +356,7 @@
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" data-target="#logoutModal" data-toggle="modal"
-                               href="{% url 'tutor:logout' %}">
+                               href="{% url 'stutor:logout' %}">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>
@@ -417,7 +418,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancel</button>
-                <a class="btn btn-primary" href="{% url 'tutor:logout'%}">Logout</a>
+                <a class="btn btn-primary" href="{% url 'stutor:logout'%}">Logout</a>
             </div>
         </div>
     </div>

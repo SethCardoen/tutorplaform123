@@ -38,9 +38,7 @@ def tutor_register_page(request):
     return render(request, 'tutor/registerpage.html', context)
 
 
-def logout_user(request):
-    logout(request)
-    return redirect('tutor:tutor_login')
+
 
 
 def home(request):
