@@ -14,6 +14,15 @@ from django.contrib.auth.models import Group
 from stutor.models import *
 
 
+def logout(request):
+    print("logout....")
+    logout(request)
+
+    return redirect('stutor:stutor_login')
+
+
+
+
 
 def tutor_register_page(request):
     print("tester")
@@ -33,7 +42,7 @@ def tutor_register_page(request):
             )
 
             messages.success(request, 'Account was created for ' + username)
-            return redirect('tutor:tutor_login')
+            return redirect('stutor:stutor_login')
     context = {'form': form}
     return render(request, 'tutor/registerpage.html', context)
 
@@ -41,11 +50,11 @@ def tutor_register_page(request):
 
 
 
-def home(request):
+def tutor_home(request):
     tutor = request.user.tutor_account
     mystudents = request.user.tutor_account.student_account_set.all()
     context = {'tutor': tutor, 'mystudents': mystudents}
-    return render(request, 'tutor/home.html', context)
+    return render(request, 'tutor/tutor_home.html', context)
 
 
 @login_required(login_url='login')

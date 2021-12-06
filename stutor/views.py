@@ -30,7 +30,7 @@ def stutor_login_page(request):
             login(request, user)
             users_in_group = Group.objects.get(name="tutor").user_set.all()
             if user in users_in_group:
-                return redirect('tutor:stutor_home')
+                return redirect('tutor:tutor_home')
             else:
                 return redirect('student:student_home')
         else:
