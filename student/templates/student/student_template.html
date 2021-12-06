@@ -68,8 +68,9 @@
                     <h6 class="collapse-header">All tutors</h6>
                 <!-- list of all tutors here -->
                     {% for i in teacher %}
-                    <a class="collapse-item" href="{% url 'student:mytutors' %}">{{i.name}}</a>
+                    <a class="collapse-item" >{{i.name}}</a>
                     {% endfor %}
+
 
                 </div>
             </div>

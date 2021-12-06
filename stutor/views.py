@@ -15,7 +15,14 @@ from django.contrib.auth.forms import UserCreationForm
 
 def logout_user(request):
     logout(request)
+    print("logout....")
+
     return redirect('stutor:stutor_login')
+
+
+
+
+
 
 @unauthenticated_user
 def stutor_login_page(request):

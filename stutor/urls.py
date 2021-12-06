@@ -10,7 +10,9 @@ urlpatterns = [
     path('student/', views.student_page, name='student'),
     path('tutor/<str:pk_tutor>/', views.tutor_page, name='tutor'),
     path('newdashboard/', views.new_dashboard),
-    path('logout/', views.logout_user, name="logout"),
+    path('logout/', views.logout, name="logout"),
+
+
 
 
 

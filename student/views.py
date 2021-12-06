@@ -46,11 +46,18 @@ def student_home(request):
     context ={'student': student, 'teacher': teach}
     return render(request, 'student/student_home.html', context)
 
+
+
+
+
+
 def logout(request):
-    print("logout....")
     logout(request)
 
     return redirect('stutor:stutor_login')
+
+
+
 
 
 
