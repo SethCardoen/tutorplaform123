@@ -111,6 +111,19 @@ def viewpreviouslessons(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['tutor'])
+def viewavailability(request):
+    tutor = request.user.tutor_account
+    allsessions = session.objects.all()
+    mysessions = allsessions.filter(tutor=tutor)
+    context = {'tutor': tutor, 'mysessions': mysessions}
+    return render(request, 'tutor/viewavailablity.html', context)
+
+
+
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['tutor'])
 def stats(request):
     tutor = request.user.tutor_account
     context = {'tutor': tutor}
