@@ -96,7 +96,15 @@ def findnewtutors(request):
 def plannewlessons(request):
     student = request.user.student_account
     subjects = stutor.models.subject.objects.all()
-    context = {'student': student, 'subjects':subjects}
+    education_levels = stutor.models.education_level.objects.all()
+    languages = stutor.models.LanguageChoice.objects.all()
+    lessonformat = stutor.models.LessonFormat.objects.all()
+    context = {'student': student,
+               'subjects':subjects,
+               'education_levels': education_levels,
+               'languages': languages,
+               'lessonformat': lessonformat,
+               }
     return render(request, 'student/plannewlessons.html', context)
 
 @login_required(login_url='login')

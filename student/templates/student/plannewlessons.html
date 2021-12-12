@@ -7,8 +7,22 @@
     {% for i in subjects %}
     <a>{{i}}</a>
     {% endfor %}
-<P>- Select Eductaion level (existing entity)
-<P>- Select FORMAT (new type enum)
+<P>- Select Eductaion level
+    {% for i in education_levels %}
+    <a>{{i}}</a>
+    {% endfor %}
+<p> select language
+    {% for i in languages %}
+    <a>{{i}}</a>
+    {% endfor %}
+
+<P>- Select FORMAT
+    {% for i in lessonformat %}
+    <a>{{i}}</a>
+    {% endfor %}
+
+
+
 <P>- Select Teacher
 <P>- Select dates
 <p>cehcke voorneeld settingd</p>

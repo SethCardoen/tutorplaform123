@@ -1,8 +1,21 @@
+from enum import Enum
+
 from django.db import models
 from datetime import datetime
 from djmoney.models.fields import MoneyField
 
 
+class LessonFormat(models.Model):
+    type = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.type
+
+class LanguageChoice(models.Model):
+    language = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.language
 
 class subject(models.Model):
     subject = models.CharField(max_length=300)
