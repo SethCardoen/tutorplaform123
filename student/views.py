@@ -53,8 +53,8 @@ def student_home(request):
 
 def logout(request):
     logout(request)
-
-    return redirect('stutor:stutor_login')
+    return redirect("/")
+    #return redirect('stutor:stutor_login')
 
 
 
@@ -95,7 +95,8 @@ def findnewtutors(request):
 @allowed_users(allowed_roles=['student'])
 def plannewlessons(request):
     student = request.user.student_account
-    context = {'student': student}
+    subjects = stutor.models.subject.objects.all()
+    context = {'student': student, 'subjects':subjects}
     return render(request, 'student/plannewlessons.html', context)
 
 @login_required(login_url='login')
