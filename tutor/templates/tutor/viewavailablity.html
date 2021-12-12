@@ -4,4 +4,33 @@
 
 <h1>Overview availability</h1>
 
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Date</th>
+        <th scope="col">start</th>
+        <th scope="col">end</th>
+        <th scope="col">topic</th>
+        <th scope="col">notes</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in myopenslots %}
+    <tr>
+        <th scope="row">{{i.date}}</th>
+        <th scope="row">{{i.start_time}}</th>
+        <th scope="row">{{i.end_time}}</th>
+        <th scope="row">{{i.topic}}</th>
+        <th scope="row">{{i.notes}}</th>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% for i in myopenslots %}
+<a>{{i}}</a>
+{% endfor %}
+
+
 {% endblock %}

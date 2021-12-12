@@ -55,7 +55,8 @@ class OpenSlot(models.Model):
     start_time = models.TimeField(u'Starting time', help_text=u'Starting time')
     end_time = models.TimeField(u'Final time', help_text=u'Final time')
     notes = models.TextField(u'Textual Notes', help_text=u'Textual Notes', blank=True, null=True)
-    tutor = models.ForeignKey(to="tutor.tutor_account", null=True, on_delete=models.SET_NULL)
+    tutor = models.ForeignKey(to="tutor.tutor_account", null=False, on_delete=models.CASCADE)
+    topic = models.ForeignKey(to="stutor.subject", null=False, on_delete=models.CASCADE)
 
 
 

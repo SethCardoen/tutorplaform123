@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
+import stutor.models
 from student.models import student_account
 from .models import tutor_account
 from django.contrib import messages
@@ -115,7 +116,10 @@ def viewavailability(request):
     tutor = request.user.tutor_account
     allsessions = session.objects.all()
     mysessions = allsessions.filter(tutor=tutor)
-    context = {'tutor': tutor, 'mysessions': mysessions}
+    myopenslots = stutor.models.OpenSlot.objects.filter(tutor=tutor)
+    context = {'tutor': tutor,
+               'mysessions': mysessions,
+               'myopenslots': myopenslots}
     return render(request, 'tutor/viewavailablity.html', context)
 
 
