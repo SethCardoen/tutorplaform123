@@ -50,6 +50,14 @@ class session(models.Model):
         return self.subject.subject
 
 
+class OpenSlot(models.Model):
+    date = models.DateField(default=datetime.now)
+    start_time = models.TimeField(u'Starting time', help_text=u'Starting time')
+    end_time = models.TimeField(u'Final time', help_text=u'Final time')
+    notes = models.TextField(u'Textual Notes', help_text=u'Textual Notes', blank=True, null=True)
+    tutor = models.ForeignKey(to="tutor.tutor_account", null=True, on_delete=models.SET_NULL)
+
+
 
 '''
 # blog/models.py
