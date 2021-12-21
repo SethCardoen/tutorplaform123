@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from django.contrib.auth.models import User
+
+import stutor.models
 from .models import tutor_account
 
 class create_tutor_form(UserCreationForm):
@@ -14,3 +16,7 @@ class tutor_account_form(ModelForm):
         fields = '__all__'
         exclude = ['user']
 
+class tutor_openslot_form(ModelForm):
+    class Meta:
+        model = stutor.models.OpenSlot
+        fields = '__all__'

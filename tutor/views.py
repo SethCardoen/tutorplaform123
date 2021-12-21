@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from stutor.decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
-from .forms import create_tutor_form, tutor_account_form
+from .forms import create_tutor_form, tutor_account_form, tutor_openslot_form
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from stutor.models import *
@@ -122,6 +122,18 @@ def viewavailability(request):
                'myopenslots': myopenslots}
     return render(request, 'tutor/viewavailablity.html', context)
 
+
+
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['tutor'])
+def enteravailability(request):
+    tutor = request.user.tutor_account
+    context = {'tutor': tutor}
+
+
+    return render(request, 'tutor/enteravailability.html', context)
 
 
 
