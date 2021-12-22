@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from stutor.decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
-from .forms import create_tutor_form, tutor_account_form, tutor_openslot_form
+from .forms import create_tutor_form, tutor_account_form
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from stutor.models import *

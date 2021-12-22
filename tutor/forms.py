@@ -16,7 +16,4 @@ class tutor_account_form(ModelForm):
         fields = '__all__'
         exclude = ['user']
 
-class tutor_openslot_form(ModelForm):
-    class Meta:
-        model = stutor.models.OpenSlot
-        fields = '__all__'
+

@@ -1,7 +1,4 @@
 from django.shortcuts import render, redirect
-from .models import *
-from .forms import sessionform, create_user_form
-from .filters import session_filter
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -9,9 +6,7 @@ from .decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
 from student.models import student_account
 from tutor.models import tutor_account
-from tutor.forms import tutor_account_form
-from django.contrib.auth.forms import UserCreationForm
-#from django.forms import inlineformset_factory
+
 
 def logout_user(request):
     logout(request)

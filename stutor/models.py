@@ -9,56 +9,40 @@ class LessonFormat(models.Model):
     type = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.type
+        return self.type, " (id:" + str(self.id) + ")"
 
 class LanguageChoice(models.Model):
     language = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.language
+        return self.language, " (id:" + str(self.id) + ")"
 
 class subject(models.Model):
     subject = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.subject
+        return self.subject, " (id:" + str(self.id) + ")"
 
 class education_level(models.Model):
     education_levels = models.CharField(max_length=300, null=True)
 
     def __str__(self):
-        return self.education_levels
+        return self.education_levels, " (id:" + str(self.id) + ")"
 
 class status(models.Model):
     current_status = models.CharField(max_length=300, null=True)
 
     def __str__(self):
-        return self.current_status
+        return self.current_status, " (id:" + str(self.id) + ")"
 
-class session(models.Model):
+class LessonRequest(models.Model):
+    lessonrequest_id = models.AutoField(primary_key=True)
     date = models.DateField(default=datetime.now)
-    time = models.TimeField(auto_now=False, auto_now_add=False)
-    student = models.ForeignKey(to="student.student_account", null=True, on_delete=models.SET_NULL)
-    subject = models.ForeignKey(subject, on_delete=models.SET_NULL, null=True)
-    tutor = models.ForeignKey(to="tutor.tutor_account", null=True, on_delete=models.SET_NULL)
-    notes = models.FileField(null=True, blank=True, default="No notes")
-    description = models.CharField(max_length=300, null=True, blank=True, default="No description")
-    price_an_hour = MoneyField(decimal_places=2, default=0, default_currency='EUR', max_digits=11, null=True)
-    current_status = models.ForeignKey(status, on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return self.subject.subject
-
-
-class OpenSlot(models.Model):
-    date = models.DateField(default=datetime.now)
-    start_time = models.TimeField(u'Starting time', help_text=u'Starting time')
-    end_time = models.TimeField(u'Final time', help_text=u'Final time')
-    notes = models.TextField(u'Textual Notes', help_text=u'Textual Notes', blank=True, null=True)
-    tutor = models.ForeignKey(to="tutor.tutor_account", null=False, on_delete=models.CASCADE)
-    topic = models.ForeignKey(to="stutor.subject", null=False, on_delete=models.CASCADE)
-
-
+    subject = models.ForeignKey(subject, on_delete=models.CASCADE, null=False)
+    education_level = models.ForeignKey(education_level, null=False, on_delete=models.CASCADE)
+    lessonformat = models.ForeignKey(LessonFormat, null=False, on_delete=models.CASCADE)
+    number_lessons = models.IntegerField(null=False)
+    remarks = models.TextField(null=True)
 
 '''
 # blog/models.py
