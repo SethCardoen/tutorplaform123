@@ -21,3 +21,4 @@ class CreateNewLessonRequest_form(ModelForm):
     class Meta:
         model = LessonRequest
         fields = '__all__'
+        exclude = ['student_account']

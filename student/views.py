@@ -14,8 +14,6 @@ from django.contrib.auth.decorators import login_required
 from stutor.decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
 
-
-
 def student_register_page(request):
 
     form = create_student_form()
@@ -48,19 +46,10 @@ def student_home(request):
     return render(request, 'student/student_home.html', context)
 
 
-
-
-
-
 def logout(request):
     logout(request)
     return redirect("/")
     #return redirect('stutor:stutor_login')
-
-
-
-
-
 
 
 @login_required(login_url='login')
@@ -96,21 +85,20 @@ def findnewtutors(request):
 @allowed_users(allowed_roles=['student'])
 def plannewlessons(request):
 
+    student = request.user.student_account
     submitted = False
     if request.method == "POST":
         form = CreateNewLessonRequest_form(request.POST)
         if form.is_valid():
-            form.save()
-            #return HttpResponseRedirect('student/requestnewlessons.html?submitted=True')
-            #return redirect('student:plannewlessons'?'submitted=True')
+            post = form.save(commit=False)
+            post.student_account = student
+            post.save()
             return HttpResponseRedirect('/student/plannewlessons/?submitted=True')
-
     else:
         form = CreateNewLessonRequest_form
         if 'submitted' in request.GET:
             submitted = True
-
-    context = {'form':form, 'submitted':submitted}
+    context = {'form':form, 'submitted':submitted, 'student':student}
     return render(request, 'student/requestnewlessons.html', context)
 
 @login_required(login_url='login')

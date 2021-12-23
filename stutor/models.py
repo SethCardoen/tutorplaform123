@@ -1,8 +1,5 @@
-from enum import Enum
-
 from django.db import models
 from datetime import datetime
-from djmoney.models.fields import MoneyField
 
 
 class LessonFormat(models.Model):
@@ -43,17 +40,12 @@ class LessonRequest(models.Model):
     lessonformat = models.ForeignKey(LessonFormat, null=False, on_delete=models.CASCADE)
     number_lessons = models.IntegerField(null=False)
     remarks = models.TextField(null=True)
+    student_account = models.ForeignKey(to='student.student_account', null=False, on_delete=models.CASCADE)
 
-'''
-# blog/models.py
-class BlogContributor(models.Model):
-contributor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
-contribution = models.CharField(max_length=255, blank=True)
 
-class Meta:
-unique_together = ('contributor', 'blog')
-'''
+
+
+
 
 
 
