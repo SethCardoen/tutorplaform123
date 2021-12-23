@@ -97,7 +97,7 @@ def findnewstudents(request):
 def plannewlessons(request):
     tutor = request.user.tutor_account
     context = {'tutor': tutor}
-    return render(request, 'tutor/plannewlessons.html', context)
+    return render(request, 'tutor/requestnewlessons.html', context)
 
 
 @login_required(login_url='login')

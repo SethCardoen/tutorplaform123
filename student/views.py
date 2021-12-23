@@ -1,3 +1,4 @@
+from django.http import request, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 import stutor.models
@@ -6,7 +7,7 @@ from stutor.models import *
 from tutor.models import tutor_account
 
 from .models import student_account
-from .forms import create_student_form, student_account_form
+from .forms import create_student_form, student_account_form,CreateNewLessonRequest_form
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -94,18 +95,23 @@ def findnewtutors(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['student'])
 def plannewlessons(request):
-    student = request.user.student_account
-    subjects = stutor.models.subject.objects.all()
-    education_levels = stutor.models.education_level.objects.all()
-    languages = stutor.models.LanguageChoice.objects.all()
-    lessonformat = stutor.models.LessonFormat.objects.all()
-    context = {'student': student,
-               'subjects':subjects,
-               'education_levels': education_levels,
-               'languages': languages,
-               'lessonformat': lessonformat,
-               }
-    return render(request, 'student/plannewlessons.html', context)
+
+    submitted = False
+    if request.method == "POST":
+        form = CreateNewLessonRequest_form(request.POST)
+        if form.is_valid():
+            form.save()
+            #return HttpResponseRedirect('student/requestnewlessons.html?submitted=True')
+            #return redirect('student:plannewlessons'?'submitted=True')
+            return HttpResponseRedirect('/student/plannewlessons/?submitted=True')
+
+    else:
+        form = CreateNewLessonRequest_form
+        if 'submitted' in request.GET:
+            submitted = True
+
+    context = {'form':form, 'submitted':submitted}
+    return render(request, 'student/requestnewlessons.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['student'])

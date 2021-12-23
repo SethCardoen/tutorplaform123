@@ -1,6 +1,21 @@
 {% extends 'student/student_template.html' %}
 
 {% block content %}
+<center>
+    <H1>Request new lessons</H1>
+    </br></br>
+    {% if submitted %}
+        Your request was submitted succesfully!!!!
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input  type="submit" value="Submit" class="btn btn-secondary">
+        </form>
+   {% endif %}
+</center>
+
+
 
 <P> Plan NEW lessons page
 <P>- Select Subject (existing entity)
@@ -10,7 +25,7 @@
 <P>- Select Eductaion level
     {% for i in education_levels %}
     <a>{{i}}</a>
-    {% endfor %}
+    {% endfor %}{}{
 <p> select language
     {% for i in languages %}
     <a>{{i}}</a>

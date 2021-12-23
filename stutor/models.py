@@ -9,31 +9,31 @@ class LessonFormat(models.Model):
     type = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.type, " (id:" + str(self.id) + ")"
+        return self.type
 
 class LanguageChoice(models.Model):
     language = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.language, " (id:" + str(self.id) + ")"
+        return self.language
 
 class subject(models.Model):
     subject = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.subject, " (id:" + str(self.id) + ")"
+        return self.subject
 
 class education_level(models.Model):
     education_levels = models.CharField(max_length=300, null=True)
 
     def __str__(self):
-        return self.education_levels, " (id:" + str(self.id) + ")"
+        return self.education_levels
 
 class status(models.Model):
     current_status = models.CharField(max_length=300, null=True)
 
     def __str__(self):
-        return self.current_status, " (id:" + str(self.id) + ")"
+        return self.current_status
 
 class LessonRequest(models.Model):
     lessonrequest_id = models.AutoField(primary_key=True)
