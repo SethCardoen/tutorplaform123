@@ -83,9 +83,12 @@ def findnewtutors(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['student'])
-def plannewlessons(request):
+def myrequests(request):
 
     student = request.user.student_account
+    all_requests = LessonRequest.objects.all()
+    my_requests = all_requests.filter(student_account=student)
+
     submitted = False
     if request.method == "POST":
         form = CreateNewLessonRequest_form(request.POST)
@@ -98,7 +101,7 @@ def plannewlessons(request):
         form = CreateNewLessonRequest_form
         if 'submitted' in request.GET:
             submitted = True
-    context = {'form':form, 'submitted':submitted, 'student':student}
+    context = {'form':form, 'submitted':submitted, 'student':student,'my_requests':my_requests}
     return render(request, 'student/requestnewlessons.html', context)
 
 @login_required(login_url='login')
