@@ -33,6 +33,16 @@ class status(models.Model):
         return self.current_status
 
 class LessonRequest(models.Model):
+    OPEN = 'open'
+    PENDING = 'pending'
+    PROCESSED = 'processed'
+
+    STATUS = (
+        (OPEN, 'open'),
+        (PENDING, 'Pending'),
+        (PROCESSED, 'processed'),
+    )
+
     lessonrequest_id = models.AutoField(primary_key=True)
     date = models.DateField(default=datetime.now)
     subject = models.ForeignKey(subject, on_delete=models.CASCADE, null=False)
@@ -41,7 +51,7 @@ class LessonRequest(models.Model):
     number_lessons = models.IntegerField(null=False)
     remarks = models.TextField(null=True)
     student_account = models.ForeignKey(to='student.student_account', null=False, on_delete=models.CASCADE)
-
+    status = models.CharField(max_length=255, choices=STATUS, default=OPEN)
 
 
 

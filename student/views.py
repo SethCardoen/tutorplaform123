@@ -83,6 +83,15 @@ def findnewtutors(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['student'])
+def mycalendar(request):
+    student = request.user.student_account
+    context = {'student': student}
+    return render(request, 'student/mycalendar.html', context)
+
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['student'])
 def myrequests(request):
 
     student = request.user.student_account
@@ -102,7 +111,7 @@ def myrequests(request):
         if 'submitted' in request.GET:
             submitted = True
     context = {'form':form, 'submitted':submitted, 'student':student,'my_requests':my_requests}
-    return render(request, 'student/requestnewlessons.html', context)
+    return render(request, 'student/myrequests.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['student'])
