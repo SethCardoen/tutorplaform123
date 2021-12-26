@@ -1,10 +1,12 @@
 from django.http import request, HttpResponseRedirect
 from django.shortcuts import render, redirect
-
+import calendar
+from calendar import HTMLCalendar
 import stutor.models
 import tutor
 from stutor.models import *
 from tutor.models import tutor_account
+from datetime import datetime
 
 from .models import student_account
 from .forms import create_student_form, student_account_form,CreateNewLessonRequest_form
@@ -83,9 +85,31 @@ def findnewtutors(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['student'])
-def mycalendar(request):
+def mycalendar(request,year,month):
+    # convert month to uppercase
+    month = month.title()
+    # convert month from str to number
+    month_number = list(calendar.month_name).index(month)
+    month_number = int(month_number)
+    # create calendar
+    cal = HTMLCalendar().formatmonth(year, month_number)
+
+    #get current date
+    now = datetime.now()
+    current_year = now.year
+    #get current time
+    time = now.strftime('%I:%M:%S')
+
     student = request.user.student_account
-    context = {'student': student}
+    context = {
+                'student': student,
+                'year':year,
+                'month':month,
+                'month_number':month_number,
+                'cal':cal,
+                'current_year':current_year,
+                'time':time}
+
     return render(request, 'student/mycalendar.html', context)
 
 
