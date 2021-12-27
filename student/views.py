@@ -128,13 +128,22 @@ def myrequests(request):
             post = form.save(commit=False)
             post.student_account = student
             post.save()
-            return HttpResponseRedirect('/student/plannewlessons/?submitted=True')
+            return HttpResponseRedirect('/student/myrequests/?submitted=True')
     else:
         form = CreateNewLessonRequest_form
         if 'submitted' in request.GET:
             submitted = True
     context = {'form':form, 'submitted':submitted, 'student':student,'my_requests':my_requests}
     return render(request, 'student/myrequests.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['student'])
+def show_request(request,request_id):
+    req = LessonRequest.objects.get(lessonrequest_id = request_id)
+    context = {'req':req}
+    return render(request, 'student/show_request.html',context)
+
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['student'])

@@ -15,20 +15,9 @@
    {% endif %}
     <HR>
     <H2> my pending requests </H2>
-
-      {% for i in my_requests %}
-    <tr>
-      <th scope="row">{{i.date}}</th>
-      <td>{{i.date}} </td>
-      <td>{{i.subject}} </td>
-      <td>{{i.education_level}} </td>
-      <td>{{i.lessonformat}} </td>
-      <td>{{i.number_lessons}} </td>
-      <td>{{i.remarks}} </td>
-      <td>{{i.student_account}} </td>
-      <td>{{i.status}} </td>
-    </tr>
     <BR>
-    {% endfor %}
+      {% for i in my_requests %}
+       <a href="{% url 'student:show_request' i.pk  %}">{{ i }}</a><br/>
+      {% endfor %}
 </center>
 {% endblock %}
