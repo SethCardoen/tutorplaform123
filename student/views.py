@@ -140,7 +140,10 @@ def myrequests(request):
 @allowed_users(allowed_roles=['student'])
 def show_request(request,request_id):
     req = LessonRequest.objects.get(lessonrequest_id = request_id)
-    context = {'req':req}
+    form = CreateNewLessonRequest_form(instance=req)
+
+
+    context = {'req':req,'form':form}
     return render(request, 'student/show_request.html',context)
 
 

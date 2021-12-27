@@ -49,7 +49,7 @@ class LessonRequest(models.Model):
     education_level = models.ForeignKey(education_level, null=False, on_delete=models.CASCADE)
     lessonformat = models.ForeignKey(LessonFormat, null=False, on_delete=models.CASCADE)
     number_lessons = models.IntegerField(null=False)
-    remarks = models.TextField(null=True)
+    remarks = models.TextField(blank=True,null=True)
     student_account = models.ForeignKey(to='student.student_account', null=False, on_delete=models.CASCADE)
     status = models.CharField(max_length=255, choices=STATUS, default=OPEN)
 

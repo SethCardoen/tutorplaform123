@@ -17,7 +17,7 @@
     <H2> my pending requests </H2>
     <BR>
       {% for i in my_requests %}
-       <a href="{% url 'student:show_request' i.pk  %}">{{ i }}</a><br/>
+       <a href="{% url 'student:show_request' i.pk  %}">{{ i.pk }} {{i.date}} {{i.subject}} {{i.education_level}} {{i.lessonformat}} {{i.number_lessons}} {{i.status}}  </a><br/>
       {% endfor %}
 </center>
 {% endblock %}
