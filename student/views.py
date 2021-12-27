@@ -85,9 +85,8 @@ def findnewtutors(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['student'])
-def mycalendar(request,year,month):
-    # convert month to uppercase
-    month = month.title()
+def mycalendar(request,year = datetime.now().year,month =  datetime.now().strftime('%B')):
+
     # convert month from str to number
     month_number = list(calendar.month_name).index(month)
     month_number = int(month_number)
@@ -105,9 +104,9 @@ def mycalendar(request,year,month):
                 'student': student,
                 'year':year,
                 'month':month,
-                'month_number':month_number,
+                'month_number':month,
                 'cal':cal,
-                'current_year':current_year,
+                'current_year':year,
                 'time':time}
 
     return render(request, 'student/mycalendar.html', context)

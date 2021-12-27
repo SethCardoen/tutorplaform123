@@ -8,7 +8,7 @@ from tutor.models import tutor_account
 
 class student_account(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length= 200, null=True)
+    name = models.CharField('student name',max_length= 200, null=True)
     surname = models.CharField(max_length=200, null=True)
     age = models.PositiveSmallIntegerField(null=True)
     phone_number = PhoneNumberField(null=True, blank = True)

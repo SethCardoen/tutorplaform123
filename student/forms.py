@@ -20,5 +20,26 @@ class student_account_form(ModelForm):
 class CreateNewLessonRequest_form(ModelForm):
     class Meta:
         model = LessonRequest
-        fields = '__all__'
-        exclude = ['student_account','status']
+        #fields = '__all__'
+        fields = ('date','subject','education_level','lessonformat','number_lessons','remarks','status')
+        #exclude = ['student_account','status']
+        labels  = {
+            'date':'',
+            'subject':'',
+            'education_level':'',
+            'lessonformat':'',
+            'number_lessons':'',
+            'remarks':'',
+            'status':''
+        }
+
+
+
+        widgets = {
+           # 'date': forms.DateInput(attrs={'class':'form-control'}),
+           # 'subject': forms.TextInput(attrs={'class':'form-control'}),
+           # 'education_level':forms.TextInput(attrs={'class':'form-control'}),
+            'number_lessons':forms.TextInput(attrs={'class':'form-control','placeholder':'Number of lessons'}),
+            'remarks':forms.TextInput(attrs={'class':'form-control','placeholder':'Remarks'}),
+          #  'status':forms.TextInput(attrs={'class':'form-control'}),
+        }
